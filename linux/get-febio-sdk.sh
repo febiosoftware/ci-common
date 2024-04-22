@@ -1,5 +1,4 @@
 #! /bin/bash
-set -o errexit
 set -o verbose
 
 set -x
@@ -17,10 +16,16 @@ PACKAGE_SEARCH="${PACKAGE}-${FEBIO_VERSION}"
 PACKAGE_URI=$(aws --output json s3api list-objects \
 	--bucket "$BUCKET" \
 	--prefix "$PACKAGE_PREFIX" \
-	--query "reverse(sort_by(Contents,&LastModified)) && Contents[?contains(Key, '$PACKAGE')]" \
+	--query "reverse(sort_by(Contents,&LastModified)) && Contents[?contains(Key, '$PACKAGE_SEARCH')]" \
 	| jq -r -e '. | max_by(.LastModified) | .Key')
 
+STATUS=$?
 
-ARCHIVE="${PACKAGE_URI##*/}"
-#aws s3 cp "s3://$BUCKET/$PACKAGE_URI" .
-#tar xzf "$ARCHIVE"
+if [[ ! -z "${PACKAGE_URI}" ]] && [[ $PACKAGE_URI != null ]]; then
+	echo "SDK found at ${PACKAGE_URI}"
+	ARCHIVE="${PACKAGE_URI##*/}"
+	aws s3 cp "s3://$BUCKET/$PACKAGE_URI" .
+	tar xzf "$ARCHIVE"
+else
+	echo "SDK not found at ${PACKAGE_PREFIX}${PACKAGE_SEARCH}*"; exit $STATUS
+fi
