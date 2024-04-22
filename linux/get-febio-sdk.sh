@@ -1,8 +1,4 @@
 #! /bin/bash
-set -o verbose
-
-set -x
-
 OS="${OS}"
 BUCKET="${BUCKET:-febio-packages}"
 PACKAGE="${PACKAGE:-febio4-sdk}"
@@ -25,7 +21,7 @@ if [[ ! -z "${PACKAGE_URI}" ]] && [[ $PACKAGE_URI != null ]]; then
 	echo "SDK found at ${PACKAGE_URI}"
 	ARCHIVE="${PACKAGE_URI##*/}"
 	aws s3 cp "s3://$BUCKET/$PACKAGE_URI" .
-	tar xzf "$ARCHIVE"
+	tar xvzf "$ARCHIVE"
 else
 	echo "SDK not found at ${PACKAGE_PREFIX}${PACKAGE_SEARCH}*"; exit $STATUS
 fi

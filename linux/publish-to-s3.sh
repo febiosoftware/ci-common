@@ -1,5 +1,4 @@
 #! /bin/bash
-set -x
 SOURCE=$1
 DIR=$(dirname "$SOURCE")
 SOURCE=$(basename "$SOURCE")
