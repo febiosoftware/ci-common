@@ -31,11 +31,10 @@ sdkVersion = getVersion("febio4-sdk/include/FECore/version.h", "FE_SDK_MAJOR_VER
 versionHeader = None
 for root, dirs, files in os.walk(".", followlinks=True):
     for name in files:
-        print(name)
-        if "febio4-sdk" in name:
+        if "febio4-sdk" in root:
             continue
         
-        if name.endswith("version.h"):
+        if name == "version.h":
             versionHeader = os.path.join(root, name)
             break
     
