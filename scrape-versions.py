@@ -31,6 +31,7 @@ sdkVersion = getVersion("febio4-sdk/include/FECore/version.h", "FE_SDK_MAJOR_VER
 versionHeader = None
 for root, dirs, files in os.walk(".", followlinks=True):
     for name in files:
+        print(name)
         if "febio4-sdk" in name:
             continue
         
@@ -40,6 +41,8 @@ for root, dirs, files in os.walk(".", followlinks=True):
     
     if versionHeader:
         break
+
+print(versionHeader)
 
 # Get current package version
 packageVersion = getVersion(versionHeader, "VERSION", "SUBVERSION", "SUBSUBVERSION")
