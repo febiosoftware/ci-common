@@ -41,8 +41,6 @@ for root, dirs, files in os.walk(".", followlinks=True):
     if versionHeader:
         break
 
-print(versionHeader)
-
 # Get current package version
 packageVersion = getVersion(versionHeader, "VERSION", "SUBVERSION", "SUBSUBVERSION")
 
