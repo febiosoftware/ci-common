@@ -2,12 +2,19 @@ import os, shutil, json
 
 os.mkdir("plugins")
 
-for root, dirs, files in os.walk("pluginRepos", followlinks=True):
-    for name in files:
-        if name.endswith(".dll") or name.endswith(".dylib") or name.endswith(".so"):
-            filename = name.split("/")[-1].split("\\")[-1]
+for dirName in os.listdir("pluginRepos"):
+    dirPath = os.path.join("pluginRepos", dirName)
+    
+    if os.path.isdir(dirPath):
+        newDir = os.path.join("plugins", dirName)
+        os.mkdir(newDir)
 
-            shutil.copy2(os.path.join(root,name), os.path.join("plugins", filename))
+        for root, dirs, files in os.walk("dirPath", followlinks=True):
+            for name in files:
+                if name.endswith(".dll") or name.endswith(".dylib") or name.endswith(".so"):
+                    filename = name.split("/")[-1].split("\\")[-1]
+
+                    shutil.copy2(os.path.join(root,name), os.path.join(newDir, filename))
 
 def getVersion(path):
     if not path:
