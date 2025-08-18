@@ -39,7 +39,8 @@ for dirName in os.listdir("pluginRepos"):
     
     if os.path.isdir(dirPath):
         versionHeader = None
-        for root, dirs, files in os.walk(".", followlinks=True):
+        for root, dirs, files in os.walk(dirPath):
+            print(name)
             if name.endswith("version.h"):
                 versionHeader = os.path.join(root, name)
                 break
