@@ -9,7 +9,7 @@ for dirName in os.listdir("pluginRepos"):
         newDir = os.path.join("plugins", dirName)
         os.mkdir(newDir)
 
-        for root, dirs, files in os.walk("dirPath", followlinks=True):
+        for root, dirs, files in os.walk(dirPath, followlinks=True):
             for name in files:
                 if name.endswith(".dll") or name.endswith(".dylib") or name.endswith(".so"):
                     filename = name.split("/")[-1].split("\\")[-1]
