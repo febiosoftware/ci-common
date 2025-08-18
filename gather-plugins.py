@@ -49,7 +49,7 @@ for dirName in os.listdir("pluginRepos"):
                 break
         
         if versionHeader:
-            versionInfo[dirName] = getVersion(os.path.join(dirPath, versionHeader))
+            versionInfo[dirName] = getVersion(versionHeader)
         else:
             print(f"Unable to find version header for {dirPath}")
 
