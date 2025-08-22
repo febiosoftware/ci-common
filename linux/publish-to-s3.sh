@@ -5,7 +5,7 @@ SOURCE=$(basename "$SOURCE")
 TARGET_NAME=$SOURCE
 pushd "$DIR" || exit 1
 OS=${OS:-Linux}
-PACKAGE="${TARGET_NAME}-${GIT_TAG}-${OS}.tar.gz"
+PACKAGE="${TARGET_NAME}-${GITHUB_SHA::7}-${OS}.tar.gz"
 BUCKET_NAME=${BUCKET_NAME:-febio-packages}
 REF_NAME=${REF_NAME:-$(git rev-parse --abbrev-ref HEAD)}
 PACKAGE_NAME=${PACKAGE_NAME:-febio}
