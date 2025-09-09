@@ -3,6 +3,18 @@ import os, json
 HOMEPATH = "/root"
 
 try:
+    devRelease = int(os.getenv("DEV_RELEASE"))
+except:
+    devRelease = 0
+
+if devRelease == 0:
+    STAGE_PATH = "stage/"
+    DEV_FLAG = ""
+else:
+    STAGE_PATH = "develop/stage/"
+    DEV_FLAG = "-d"
+
+try:
     with open("plugins/versions.json", "r") as file:
         versionInfo = json.load(file)
 
@@ -18,8 +30,8 @@ try:
         osFlag = "-l"
 
     for name in versionInfo:
-        os.system(f"scp plugins/{name}/* repo:{HOMEPATH}/pluginRepo/files/{name}/develop/stage/")
-        os.system(f'ssh repo "python3 {HOMEPATH}/modelServer/plugins.py -d {name} {versionInfo[name]} {febioVersion} {osFlag}"')
+        os.system(f"scp plugins/{name}/* repo:{HOMEPATH}/pluginRepo/files/{name}/{STAGE_PATH}")
+        os.system(f'ssh repo "python3 {HOMEPATH}/modelServer/plugins.py {DEV_FLAG} {name} {versionInfo[name]} {febioVersion} {osFlag}"')
 
 except FileNotFoundError:
     print("Error: 'plugins/versions.json not found. ")
