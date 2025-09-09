@@ -37,8 +37,12 @@ def getVersion(path):
 
 versionInfo = {}
 
+FEBIO_SDK = os.getenv("FEBIO_SDK")
+if FEBIO_SDK is None:
+    FEBIO_SDK = "febio4-sdk"
+
 # FEBio version
-versionInfo["febio"] = getVersion("febio4-sdk/include/FEBioLib/version.h")
+versionInfo["febio"] = getVersion(FEBIO_SDK + "/include/FEBioLib/version.h")
 
 # Find version for each plugin
 for dirName in os.listdir("pluginRepos"):
