@@ -4,10 +4,9 @@ BUCKET="${BUCKET:-febio-packages}"
 PACKAGE_PATH="${PACKAGE_PATH:-febio4}"
 PACKAGE="${PACKAGE:-febio4-sdk}"
 PACKAGE_BRANCH="${PACKAGE_BRANCH:-develop}"
-VERSION="${VERSION:-v}"
 
 PACKAGE_PREFIX="${PACKAGE_PATH}/${PACKAGE_BRANCH}/${OS}/"
-PACKAGE_SEARCH="${PACKAGE}-${VERSION}"
+PACKAGE_SEARCH="${PACKAGE}"
 
 PACKAGE_URI=$(aws --output json s3api list-objects \
 	--bucket "$BUCKET" \
