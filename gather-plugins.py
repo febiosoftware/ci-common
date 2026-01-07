@@ -39,7 +39,7 @@ versionInfo = {}
 
 FEBIO_SDK = os.getenv("FEBIO_SDK")
 if FEBIO_SDK is None:
-    FEBIO_SDK = "sdk"
+    FEBIO_SDK = "febio4-sdk"
 
 # FEBio version
 versionInfo["febio"] = getVersion(FEBIO_SDK + "/include/FEBioLib/version.h")
