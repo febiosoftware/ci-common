@@ -1,7 +1,5 @@
 import os, json
 
-SERVER_ROOT = "/serverRoot"
-
 try:
     devRelease = int(os.getenv("DEV_RELEASE"))
 except:
@@ -30,8 +28,8 @@ try:
         osFlag = "-l"
 
     for name in versionInfo:
-        os.system(f"scp plugins/{name}/* repo:{SERVER_ROOT}/pluginRepo/files/{name}/{STAGE_PATH}")
-        os.system(f'ssh repo "python3 {SERVER_ROOT}/modelServer/plugins.py {DEV_FLAG} {name} {versionInfo[name]} {febioVersion} {osFlag}"')
+        os.system(f"scp plugins/{name}/* repo:/serverRoot/pluginRepo/files/{name}/{STAGE_PATH}")
+        os.system(f'ssh repo "python3 /serverCode/serverTools/pluginTools.py {DEV_FLAG} {name} {versionInfo[name]} {febioVersion} {osFlag}"')
 
 except FileNotFoundError:
     print("Error: 'plugins/versions.json' not found.")
