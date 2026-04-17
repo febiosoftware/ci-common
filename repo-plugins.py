@@ -1,6 +1,6 @@
 import os, json
 
-HOMEPATH = "/root"
+SERVER_ROOT = "/serverRoot"
 
 try:
     devRelease = int(os.getenv("DEV_RELEASE"))
@@ -30,10 +30,10 @@ try:
         osFlag = "-l"
 
     for name in versionInfo:
-        os.system(f"scp plugins/{name}/* repo:{HOMEPATH}/pluginRepo/files/{name}/{STAGE_PATH}")
-        os.system(f'ssh repo "python3 {HOMEPATH}/modelServer/plugins.py {DEV_FLAG} {name} {versionInfo[name]} {febioVersion} {osFlag}"')
+        os.system(f"scp plugins/{name}/* repo:{SERVER_ROOT}/pluginRepo/files/{name}/{STAGE_PATH}")
+        os.system(f'ssh repo "python3 {SERVER_ROOT}/modelServer/plugins.py {DEV_FLAG} {name} {versionInfo[name]} {febioVersion} {osFlag}"')
 
 except FileNotFoundError:
-    print("Error: 'plugins/versions.json not found. ")
+    print("Error: 'plugins/versions.json' not found.")
 except json.JSONDecodeError:
     print("Error: Invalid JSON format in 'plugins/versions.json'.")
