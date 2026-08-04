@@ -7,7 +7,7 @@ for dirName in os.listdir("pluginRepos"):
     
     if os.path.isdir(dirPath):
         newDir = os.path.join("plugins", dirName)
-        os.mkdir(newDir)
+        os.makedirs(newDir, exist_ok=True)
 
         for root, dirs, files in os.walk(dirPath, followlinks=True):
             for name in files:
