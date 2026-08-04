@@ -1,6 +1,6 @@
 import os, shutil, json
 
-os.mkdir("plugins")
+os.makedirs("plugins", exist_ok=True)
 
 for dirName in os.listdir("pluginRepos"):
     dirPath = os.path.join("pluginRepos", dirName)
